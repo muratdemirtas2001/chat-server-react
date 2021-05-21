@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import MessageBoard from "./MessageBoard";
 import SeeLatestButton from "./SeeLatestButton";

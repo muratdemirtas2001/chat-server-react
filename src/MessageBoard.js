@@ -5,6 +5,7 @@ const axios = require("axios");
 function MessageBoard({ data, handler }) {
   const [from, setFrom] = useState("");
   const [text, setText] = useState("");
+  const [editText,setEditText]=useState("murat is lazy")
   function fromHandler(e) {
     setFrom(e.target.value);
   }
@@ -14,41 +15,59 @@ function MessageBoard({ data, handler }) {
 
   function onSubmitHandler(e) {
     e.preventDefault();
-    // axios
-    //   .post("https://muratdemirtas-chat-server.glitch.me/messages", {
-    //     from: "murat",
-    //     text: "helllllooooo",
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     console.log(res.data);
-    //     window.location = "/retrieve"; //This line of code will redirect you once the submission is succeed
-    //   });
     console.log("hello on submit handler");
     var body = {
       from: from,
       text: text,
     };
 
-    axios({
-      method: "post",
-      url: "https://muratdemirtas-chat-server.glitch.me/messages",
-      data: body,
+    // axios({
+    //   method: "post",
+    //   url: "https://muratdemirtas-chat-server.glitch.me/messages",
+    //   data: body,
+    // })
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+    // const data = { username: "example" };
+
+    fetch("https://muratdemirtas-chat-server.glitch.me/messages", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     })
-      .then(function (response) {
-        console.log(response);
+      .then((response) => response.json())
+      .then((body) => {
+        console.log("Success:", body);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((error) => {
+        console.error("Error:", error);
       });
   }
+   function handleEdit(id) {
+     console.log("hello from edit");
+     var body = {
+       text: editText,
+     };
+
+     axios({
+       method: "patch",
+       url: `https://muratdemirtas-chat-server.glitch.me/messages/${id}`,
+       data: body,
+     });
+   }
   if (data) {
     return (
       <>
         <div className="content">
           <div className="message-board">
             {data.map((message) => {
-              return <Message message={message} />;
+              return <Message message={message} handler={handler} handleEdit={handleEdit} />;
             })}
           </div>
           <div className="message-input-wrapper">
