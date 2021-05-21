@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import MessageBoard from "./MessageBoard";
+import SeeLatestButton from "./SeeLatestButton";
+import { useEffect, useState } from "react";
 
 function App() {
+  console.log("APP");
+  const [data, setData] = useState("");
+  const [isUpdatingData, setIsUpdatingData] = useState(false);
+  useEffect(() => {
+    console.log("hello");
+    fetch("https://muratdemirtas-chat-server.glitch.me/messages/latest")
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log("useEffect");
+        setData(data);
+        setIsUpdatingData(false);
+      });
+  }, [isUpdatingData]);
+  // console.log(isUpdatingData);
+  function handler() {
+    setIsUpdatingData(true);
+    console.log("hello from handler appp")
+  }
+  // setIsUpdatingData(true);
+  // console.log(isUpdatingData);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <MessageBoard data={data} handler={handler} />
+      <SeeLatestButton handler={handler} />
+    </>
   );
 }
 
