@@ -1,23 +1,51 @@
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 .content {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .message-board {
-  width: 75%;
+display: flex;
+flex-direction: column-reverse;
   margin: 25px;
 }
 .message-input-wrapper {
-  width: 25%;
-  margin: 100px 25px;
+  margin: 10px 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
 }
 .form-wrapper {
+  max-width: 90%;
+
   display: flex;
-  flex-direction: column;
 }
 .message-wrapper {
-  background-color: gray;
+  padding: 10px 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.message-text-wrapper {
+  width: 85%;
+}
+.message-icons-wrapper {
+  width: 10%;
+  display: flex;
+  justify-content: space-around;
+}
+.icon {
+  cursor: pointer;
+}
+input {
+  padding: 20px;
+}
+.extended-input-size{
+  width: 100ch;
 }
