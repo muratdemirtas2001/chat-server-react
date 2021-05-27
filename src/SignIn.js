@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ signInHandler, setIsUserSignedIn }) {
+export default function SignIn({ signInHandler }) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -65,7 +65,6 @@ export default function SignIn({ signInHandler, setIsUserSignedIn }) {
       email: email,
       password: password,
     };
-    console.log(body);
 
     fetch("https://muratdemirtas-chat-server.glitch.me/", {
       method: "POST", // or 'PUT'
@@ -78,8 +77,10 @@ export default function SignIn({ signInHandler, setIsUserSignedIn }) {
       .then((body) => {
         if (body.authentication === true) {
           signInHandler();
+          console.log("Success:", body);
+        } else {
+          console.log("Error-password email don't match");
         }
-        console.log("Success:", body);
       })
       .catch((error) => {
         console.error("Error:", error);
