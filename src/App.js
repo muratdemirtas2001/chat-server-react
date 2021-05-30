@@ -33,7 +33,7 @@ function App() {
       <Navbar />
       {isUserSignedIn ? (
         <>
-          <MessageBoard data={data} handler={handler} />
+          <MessageBoard data={data} handler={handler} setIsUpdatingData={setIsUpdatingData} />
         </>
       ) : (
         <SignIn signInHandler={signInHandler} />

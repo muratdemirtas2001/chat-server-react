@@ -5,17 +5,23 @@ import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
 import { Tooltip } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
-
+import Edit from "./Edit";
 
 const axios = require("axios");
-function MessageBoard({ data, handler }) {
+function MessageBoard({ data, handler, setIsUpdatingData }) {
   const [from, setFrom] = useState("");
   const [text, setText] = useState("");
   const [editText, setEditText] = useState("murat is lazy");
+  const [isEditing, setIsEditing] = useState(false);
+  const [messageId, setMessageId] = useState();
+
   function fromHandler(e) {
+    console.log(e.target.value);
     setFrom(e.target.value);
   }
+
   function textHandler(e) {
+    console.log(e.target.value);
     setText(e.target.value);
   }
 
@@ -52,20 +58,29 @@ function MessageBoard({ data, handler }) {
         console.log("Success:", body);
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.log("Error:", error);
       });
-  }
-  function handleEdit(id) {
-    var body = {
-      text: editText,
-    };
 
-    axios({
-      method: "patch",
-      url: `https://muratdemirtas-chat-server.glitch.me/messages/${id}`,
-      data: body,
-    });
+    setText("");
   }
+  function handleEdit() {
+    setIsEditing(true);
+  }
+  // function onSubmitHandleEdit(event, id) {
+  //   event.preventDefault();
+  //   console.log("hello from onSubmitHandleEdit");
+  //   // setIsEditing(true);
+  //   var body = {
+  //     text: editText,
+  //     from: editText,
+  //   };
+
+  //   axios({
+  //     method: "put",
+  //     url: `https://muratdemirtas-chat-server.glitch.me/messages/${id}`,
+  //     data: body,
+  //   });
+  // }
   if (data) {
     return (
       <>
@@ -82,6 +97,7 @@ function MessageBoard({ data, handler }) {
                 id="outlined-basic"
                 label="From"
                 name="from"
+                value={from}
                 variant="outlined"
                 onChange={fromHandler}
               />
@@ -90,6 +106,7 @@ function MessageBoard({ data, handler }) {
                 label="Message"
                 variant="outlined"
                 name="text"
+                value={text}
                 onChange={textHandler}
                 className="extended-input-size"
               />
@@ -119,7 +136,7 @@ function MessageBoard({ data, handler }) {
               {/* <button type="submit" onClick={handler}>
                 send message
               </button> */}
-              {/* <Tooltip title="Send">
+            {/* <Tooltip title="Send">
                 <IconButton type="submit" onClick={handler} aria-label="send">
                   <SendOutlinedIcon fontSize="large" />
                 </IconButton>
@@ -127,12 +144,28 @@ function MessageBoard({ data, handler }) {
             </form>  */}
           </div>
           <div className="message-board">
+            {isEditing ? (
+              <Edit
+                textHandler={textHandler}
+                fromHandler={fromHandler}
+                // onSubmitHandleEdit={onSubmitHandleEdit}
+                onSubmitHandler={onSubmitHandler}
+                text={text}
+                from={from}
+                handleEdit={handleEdit}
+                setIsEditing={setIsEditing}
+                messageId={messageId}
+                setIsUpdatingData={setIsUpdatingData}
+              />
+            ) : null}
             {data.map((message) => {
               return (
                 <Message
                   message={message}
                   handler={handler}
                   handleEdit={handleEdit}
+                  setIsEditing={setIsEditing}
+                  setMessageId={setMessageId}
                 />
               );
             })}

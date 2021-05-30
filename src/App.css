@@ -9,8 +9,8 @@
   flex-direction: column;
 }
 .message-board {
-display: flex;
-flex-direction: column-reverse;
+  display: flex;
+  flex-direction: column-reverse;
   margin: 25px;
 }
 .message-input-wrapper {
@@ -46,6 +46,15 @@ flex-direction: column-reverse;
 input {
   padding: 20px;
 }
-.extended-input-size{
+.extended-input-size {
   width: 100ch;
+}
+
+.edit-message {
+  height: 200px;
+  background-color: rgb(196, 186, 186);
+  position: absolute;
+  top: 200px;
+  box-shadow: 200px 200px 200px 0 rgba(19, 18, 18, 0.2);
+  z-index: 990;
 }

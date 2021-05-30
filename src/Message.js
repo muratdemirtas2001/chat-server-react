@@ -7,7 +7,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 const axios = require("axios");
 
-function Message({ message, handler, handleEdit }) {
+function Message({ message, handler, handleEdit, setIsEditing, setMessageId }) {
   function handleDelete(id) {
     // console.log("hello from delete");
     // axios({
@@ -31,11 +31,25 @@ function Message({ message, handler, handleEdit }) {
       .then((response) => {
         return response.json();
       })
-      .then((data) =>
-        // this is the data we get after putting our data, do whatever you want with this data
-        handler()
-      );
+      .then((data) => handler());
   }
+
+  // function handleEdit(event) {
+  //   event.preventDefault();
+  //   event.preventDefault();
+  //   console.log("hello from onSubmitHandleEdit");
+  //   // setIsEditing(true);
+  //   var body = {
+  //     // text: editText,
+  //     // from: editText,
+  //   };
+
+  //   axios({
+  //     method: "put",
+  //     // url: `https://muratdemirtas-chat-server.glitch.me/messages/${id}`,
+  //     data: body,
+  //   });
+  // }
 
   return (
     <>
@@ -61,7 +75,10 @@ function Message({ message, handler, handleEdit }) {
             <IconButton aria-label="edit">
               <EditIcon
                 fontSize="large"
-                onClick={() => handleEdit(message.id)}
+                onClick={() => {
+                  setMessageId(message.id);
+                  setIsEditing(true);
+                }}
               />
             </IconButton>
           </Tooltip>
