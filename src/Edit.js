@@ -6,14 +6,14 @@ import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 const axios = require("axios");
 function Edit({
-  onSubmitHandleEdit,
   messageId,
-  handleEdit,
   setIsEditing,
   setIsUpdatingData,
+  editFrom,
+  editText,
 }) {
-  const [from, setFrom] = useState("");
-  const [text, setText] = useState("");
+  const [from, setFrom] = useState(editFrom);
+  const [text, setText] = useState(editText);
 
   function fromHandler(e) {
     console.log(e.target.value);
@@ -26,6 +26,7 @@ function Edit({
   }
 
   function handleEditSubmit(event) {
+    setIsUpdatingData(false);
     event.preventDefault();
     //   event.preventDefault();
     console.log("hello from onSubmitHandleEdit");

@@ -5,7 +5,6 @@ import Navbar from "./Navbar";
 import { useEffect, useState } from "react";
 import SignIn from "./SignIn";
 function App() {
-
   const [data, setData] = useState("");
   const [isUpdatingData, setIsUpdatingData] = useState(false);
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
@@ -21,10 +20,6 @@ function App() {
       });
   }, [isUpdatingData]);
 
-  function handler() {
-    setIsUpdatingData(true);
-  }
-
   function signInHandler() {
     setIsUserSignedIn(true);
   }
@@ -33,7 +28,7 @@ function App() {
       <Navbar />
       {isUserSignedIn ? (
         <>
-          <MessageBoard data={data} handler={handler} setIsUpdatingData={setIsUpdatingData} />
+          <MessageBoard data={data} setIsUpdatingData={setIsUpdatingData} />
         </>
       ) : (
         <SignIn signInHandler={signInHandler} />

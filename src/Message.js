@@ -1,13 +1,20 @@
 import React from "react";
-import { BsTrash } from "react-icons/bs";
-import { AiFillEdit } from "react-icons/ai";
+// import { BsTrash } from "react-icons/bs";
+// import { AiFillEdit } from "react-icons/ai";
 import { Tooltip } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
-const axios = require("axios");
+// const axios = require("axios");
 
-function Message({ message, handler, handleEdit, setIsEditing, setMessageId }) {
+function Message({
+  message,
+  setIsEditing,
+  setMessageId,
+  setIsUpdatingData,
+  setEditText,
+  setEditFrom,
+}) {
   function handleDelete(id) {
     // console.log("hello from delete");
     // axios({
@@ -31,7 +38,7 @@ function Message({ message, handler, handleEdit, setIsEditing, setMessageId }) {
       .then((response) => {
         return response.json();
       })
-      .then((data) => handler());
+      .then((data) => setIsUpdatingData(true));
   }
 
   // function handleEdit(event) {
@@ -77,6 +84,8 @@ function Message({ message, handler, handleEdit, setIsEditing, setMessageId }) {
                 fontSize="large"
                 onClick={() => {
                   setMessageId(message.id);
+                  setEditText(message.text);
+                  setEditFrom(message.from);
                   setIsEditing(true);
                 }}
               />

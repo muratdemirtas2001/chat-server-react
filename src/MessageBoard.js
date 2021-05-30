@@ -7,13 +7,14 @@ import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Edit from "./Edit";
 
-const axios = require("axios");
-function MessageBoard({ data, handler, setIsUpdatingData }) {
+// const axios = require("axios");
+function MessageBoard({ data, setIsUpdatingData }) {
   const [from, setFrom] = useState("");
   const [text, setText] = useState("");
-  const [editText, setEditText] = useState("murat is lazy");
   const [isEditing, setIsEditing] = useState(false);
   const [messageId, setMessageId] = useState();
+  const [editFrom, setEditFrom] = useState("");
+  const [editText, setEditText] = useState("");
 
   function fromHandler(e) {
     console.log(e.target.value);
@@ -27,6 +28,7 @@ function MessageBoard({ data, handler, setIsUpdatingData }) {
 
   function onSubmitHandler(e) {
     e.preventDefault();
+    setIsUpdatingData(false);
     console.log("hello on submit handler");
     var body = {
       from: from,
@@ -62,10 +64,11 @@ function MessageBoard({ data, handler, setIsUpdatingData }) {
       });
 
     setText("");
+    setIsUpdatingData(true);
   }
-  function handleEdit() {
-    setIsEditing(true);
-  }
+  // function handleEdit() {
+  //   setIsEditing(true);
+  // }
   // function onSubmitHandleEdit(event, id) {
   //   event.preventDefault();
   //   console.log("hello from onSubmitHandleEdit");
@@ -111,7 +114,11 @@ function MessageBoard({ data, handler, setIsUpdatingData }) {
                 className="extended-input-size"
               />
               <Tooltip title="Send">
-                <IconButton type="submit" onClick={handler} aria-label="send">
+                <IconButton
+                  type="submit"
+                  onClick={() => setIsUpdatingData(true)}
+                  aria-label="send"
+                >
                   <SendOutlinedIcon fontSize="large" />
                 </IconButton>
               </Tooltip>
@@ -146,26 +153,23 @@ function MessageBoard({ data, handler, setIsUpdatingData }) {
           <div className="message-board">
             {isEditing ? (
               <Edit
-                textHandler={textHandler}
-                fromHandler={fromHandler}
-                // onSubmitHandleEdit={onSubmitHandleEdit}
-                onSubmitHandler={onSubmitHandler}
-                text={text}
-                from={from}
-                handleEdit={handleEdit}
                 setIsEditing={setIsEditing}
                 messageId={messageId}
                 setIsUpdatingData={setIsUpdatingData}
+                editFrom={editFrom}
+                editText={editText}
               />
             ) : null}
             {data.map((message) => {
               return (
                 <Message
                   message={message}
-                  handler={handler}
-                  handleEdit={handleEdit}
+                  // handler={handler}
+                  setIsUpdatingData={setIsUpdatingData}
                   setIsEditing={setIsEditing}
                   setMessageId={setMessageId}
+                  setEditText={setEditText}
+                  setEditFrom={setEditFrom}
                 />
               );
             })}
