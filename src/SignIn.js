@@ -52,6 +52,7 @@ export default function SignIn({
   signInHandler,
   setIsUserSigningUp,
   isUserSigningUp,
+  setIsUserSignedIn,
 }) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
@@ -95,7 +96,10 @@ export default function SignIn({
   return (
     <>
       {isUserSigningUp ? (
-        <Signup setIsUserSigningUp={setIsUserSigningUp} />
+        <Signup
+          setIsUserSigningUp={setIsUserSigningUp}
+          setIsUserSignedIn={setIsUserSignedIn}
+        />
       ) : (
         <Container component="main" maxWidth="xs">
           <CssBaseline />

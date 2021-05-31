@@ -41,6 +41,7 @@ function App() {
           signInHandler={signInHandler}
           setIsUserSigningUp={setIsUserSigningUp}
           isUserSigningUp={isUserSigningUp}
+          setIsUserSignedIn={setIsUserSignedIn}
         />
       )}
     </>

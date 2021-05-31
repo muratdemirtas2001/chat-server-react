@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp({ setIsUserSigningUp }) {
+export default function SignUp({ setIsUserSigningUp, setIsUserSignedIn }) {
   const classes = useStyles();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -187,7 +187,14 @@ export default function SignUp({ setIsUserSigningUp }) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link
+                onClick={() => {
+                  console.log("hello from already signed in");
+                  setIsUserSigningUp(false);
+                }}
+                href="#"
+                variant="body2"
+              >
                 Already have an account? Sign in
               </Link>
             </Grid>

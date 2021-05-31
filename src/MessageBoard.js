@@ -10,7 +10,11 @@ import Edit from "./Edit";
 console.log(module);
 
 // const axios = require("axios");
-function MessageBoard({ data, setIsUpdatingData, setIsUserSignedIn }) {
+function MessageBoard({
+  data,
+  setIsUpdatingData,
+  setIsUserSignedIn,
+}) {
   const [from, setFrom] = useState("");
   const [text, setText] = useState("");
   const [isEditing, setIsEditing] = useState(false);
