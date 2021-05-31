@@ -2,6 +2,7 @@ import React from "react";
 import Message from "./Message";
 import { useState } from "react";
 import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Tooltip } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
@@ -9,7 +10,7 @@ import Edit from "./Edit";
 console.log(module);
 
 // const axios = require("axios");
-function MessageBoard({ data, setIsUpdatingData }) {
+function MessageBoard({ data, setIsUpdatingData, setIsUserSignedIn }) {
   const [from, setFrom] = useState("");
   const [text, setText] = useState("");
   const [isEditing, setIsEditing] = useState(false);
@@ -150,6 +151,17 @@ function MessageBoard({ data, setIsUpdatingData }) {
                 </IconButton>
               </Tooltip>
             </form>  */}
+          </div>
+          <div className="log-out">
+            <Tooltip title="LOG-OUT">
+              <IconButton
+                type="submit"
+                onClick={() => setIsUserSignedIn(false)}
+                aria-label="Log-out"
+              >
+                <ExitToAppIcon fontSize="large" />
+              </IconButton>
+            </Tooltip>
           </div>
           <div className="message-board">
             {isEditing ? (

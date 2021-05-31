@@ -30,7 +30,11 @@ function App() {
       <Navbar />
       {isUserSignedIn ? (
         <>
-          <MessageBoard data={data} setIsUpdatingData={setIsUpdatingData} />
+          <MessageBoard
+            data={data}
+            setIsUpdatingData={setIsUpdatingData}
+            setIsUserSignedIn={setIsUserSignedIn}
+          />
         </>
       ) : (
         <SignIn
