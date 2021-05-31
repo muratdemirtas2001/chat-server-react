@@ -6,6 +6,7 @@ import { Tooltip } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Edit from "./Edit";
+console.log(module);
 
 // const axios = require("axios");
 function MessageBoard({ data, setIsUpdatingData }) {
